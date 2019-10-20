@@ -16,19 +16,20 @@ import Container from 'react-materialize/lib/Container';
 
 function App() {
   return (
-    <Container>    
-      
-    <Row className="text-center">
-      <Col xs={6} md={4} ml={2}>
-        <Image src={logo} roundedCircle width="40%;" />
-      </Col>
-    </Row>
+    <Container>   
+     <div className="center"> 
+        <Row  className="justify-content-center">
+          <Col xs={6} md={5} ml={3}>
+            <p ><Image src={logo} roundedCircle width="40%;"  /></p>
+          </Col>
+        </Row>
+    </div>
   <Navbar bg="light" expand="lg" className="content-center">
       <Navbar.Brand href="#home"></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
+              <Nav.Link href="#home"></Nav.Link>
               <Nav.Link href="#link">Link</Nav.Link>
                 <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -44,10 +45,25 @@ function App() {
     </Form>
          </Navbar.Collapse>
     </Navbar>
-    </Container>
+    <Row>
+      <Col>
+        <div class="conteudo">
+          <h1>Por que usar?</h1>
+          <h6>A busca diária por informações é algo totalmente relevante, atinge diretamente a produtividade para agrupar todos os dados. Com isso esse WebApp vai facilitar a vida de quem vive por informações. </h6>
+          <h6>Dados processados e tratados da forma mais fácil e pratica para o seu uso.</h6>
+          <h6>Com a diversividade de locais onde os dados se localizam, ter uma plataforma que agrupa todos de forma unificada</h6>
+          <h6>cotribui para seu uso e confiabilidade das informações, podendo assim ter veracidade, velocidade e valores ao mesmo tempo.</h6>
+          <h6></h6>
+        </div>
+      </Col>
+ 
+     
+    </Row>
 
+    </Container>
   )
 }
+
 
 
 export default App;
