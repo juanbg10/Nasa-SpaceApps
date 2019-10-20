@@ -7,24 +7,34 @@ object Nasarenos {
   
   val f = function
 
-  def mineracao( df: Dataframe) = Dataframe {
-    return df.select(func.col("Index").alias("cd_col").type(StringType),
-    	func.col("Year").alias("ds_year").type(DecimalType(3,0)),
-    	func.col("Yday").alias("ds_yday").type(DecimalType(3,0)),
-    	func.col("MinDay").alias("ds_minday").type(DecimalType(3,0)),
-    	func.col("MaxDay").alias("ds_maxday").type(DecimalType(3,0)),
-    	func.col("Month").alias("ds_month").type(IntegerType),
-    	func.col("Lat").alias("ds_lat").type(StringType),
-    	func.col("Lon").alias("ds_long").type(StringType),
-    	func.col("MinLat").alias("ds_lat_min").type(StringType),
-    	func.col("MaxLat").alias("ds_lat_max").type(StringType),
-    	func.col("MinLon").alias("ds_long_min").type(StringType),
-    	func.col("MaxLon").alias("ds_long_max").type(StringType),
-    	func.col("Length").alias("ds_length").type(IntegerType),
-    	func.col("Avg_temp").alias("ds_avgtemp").type(StringType),
-    	func.col("Min_temp").alias("ds_mintemp").type(StringType),
-    	func.col("Max_temp").alias("ds_maxtemp").type(StringType))
-        func.withColumn("date_repart", func.lit(func.current_date()))
+  def mineracaoTemperatura( df: Dataframe) = Dataframe {
+    return df.select(func.col("Index").alias("cd_local").cast(IntegerType()),
+			func.col("Lat").alias("ds_lat").cast(StringType()),
+			func.col("Lon").alias("ds_long").cast(StringType()),
+			func.col("Avg_temp").alias("ds_temperatura").cast(StringType())
+		)
+			.withColumn("dt_repar", func.lit(func.concat(df("ds_year"), "-", df("ds_month"), "-", df("ds_yday")))).cast(DateType())
+			.withColumn("dt_local", func.lit(func.current_date())).cast(DateType())
+			.withColumn("ds_vegetacao", func.lit(null))StringType()
+			.withColumn("ds_plurometrico", func.lit(null)).cast(StringType())
+
   }
+
+	def mineracaoVegetacao( df: Dataframe) = Dataframe {
+		return df.select(func.col("Index").alias("cd_local").cast(IntegerType()),
+			func.col("Lat").alias("ds_lat").cast(StringType()),
+			func.col("Lon").alias("ds_long").cast(StringType()),
+			func.col("ercent").alias("ds_vegetacao").cast(StringType())
+		)
+			.withColumn("dt_repar", func.lit(func.concat(df("ds_year"), "-", df("ds_month"), "-", df("ds_yday")))).cast(DateType())
+			.withColumn("dt_local", func.lit(func.current_date())).cast(DateType())
+			.withColumn("ds_temperatura", func.lit(null))StringType()
+			.withColumn("ds_plurometrico", func.lit(null)).cast(StringType())
+
+	}
+
+	def VegeTemp (veg: Dataframe, temp:Dataframe) = Dataframe{
+		return veg.unionAll(temp)
+	}
 
   }
