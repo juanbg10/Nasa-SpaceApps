@@ -10,8 +10,6 @@ object Initializer extends App {
   val spark = SparkSession.builder.appName(Conf.sparkName).getOrCreate()
   val sparkConf = new SparkConf(false).setAppName(Conf.sparkName).setMaster("local")
   
-  val enviromentFlag = ssc.sparkContext.broadcast(flag)
-  
   val mockado = Dados.dadosMock
   val informacaoNasa = Dados.dadosNasa
 
