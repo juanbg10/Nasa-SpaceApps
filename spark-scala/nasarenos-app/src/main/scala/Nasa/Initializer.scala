@@ -7,24 +7,25 @@ import org.apache.spark._
 
 object Initializer extends App {
 
-  val sparkConf = new SparkConf().setAppName(Config.sparkName)
+  val spark = SparkSession.builder.appName(Conf.sparkName).getOrCreate()
+  val sparkConf = new SparkConf(false).setAppName(Conf.sparkName).setMaster("local")
   
   val enviromentFlag = ssc.sparkContext.broadcast(flag)
   
-  val inform = Dados.dadosMock
-   
+  val mockado = Dados.dadosMock
+  val informacaoNasa = Dados.dadosNasa
+
   var dadoFim = None
 
     try {
 
-     dadoFim = Nasareno.mineracao(inform)	
+     dadoFim = Nasareno.mineracaoTemperatura(mockado)
 
     } catch {
       case e: Exception => print(e.getMessage)
     }
 
-     dadoFim.save(Config.scyllaTable,Config.scyllaKey)
+  val sparkReader = dadoFim.save(Config.keyspace,Config.tableLocal).start()
 
-  ssc.start()
-  ssc.awaitTermination()
+  sparkReader.awaitTermination()
   }
