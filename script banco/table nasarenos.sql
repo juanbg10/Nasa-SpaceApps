@@ -10,7 +10,7 @@ insert into nasarenos.login (1, "adm@adm.com", "adm", 1);
 
 insert into nasarenos.usuario(1, "Giovana Alves", "11045010", "1997-05-21", 1,"02", "Fatec Santos", "matricula");
 
-insert into nasarenos.criterio(1,"temperatura");
+insert into criterio(1,"temperatura");
 insert into criterio(2,"vegetacao");
 insert into criterio(3,"plurometrico");
 
