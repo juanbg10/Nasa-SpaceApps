@@ -1,5 +1,5 @@
 const express = require('express')
-const MsSql = require('mssql')
+const NodeMssql = require('mssql')
 const database = require('/config/db')
 const app = express()
 require('./routes/routes')(app, {});
